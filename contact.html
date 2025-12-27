@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>تواصل مع المختبر | حذيفة الذيب</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --neon-cyan: #00f2ff;
+            --deep-dark: #020205;
+            --glass: rgba(255, 255, 255, 0.05);
+            --google-red: #ea4335;
+        }
+
+        body {
+            background-color: var(--deep-dark);
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* فيديو الخلفية */
+        .video-bg-wrapper {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: -2;
+        }
+        .video-bg-wrapper video { width: 100%; height: 100%; object-fit: cover; opacity: 0.2; }
+        .video-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 20%, var(--deep-dark) 90%); z-index: -1;
+        }
+
+        /* كروت التواصل */
+        .contact-card {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            transition: 0.4s;
+            height: 100%;
+            text-decoration: none;
+            display: block;
+        }
+        .contact-card:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+            transform: translateY(-8px);
+        }
+
+        /* تمييز زر الخريطة */
+        .map-card { border: 1px solid var(--google-red); }
+        .map-card:hover { 
+            border-color: var(--google-red); 
+            box-shadow: 0 0 30px rgba(234, 67, 53, 0.3);
+        }
+
+        .icon-box {
+            font-size: 2.8rem;
+            color: var(--neon-cyan);
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px var(--neon-cyan));
+        }
+
+        .map-icon { color: var(--google-red); filter: drop-shadow(0 0 10px var(--google-red)); }
+
+        .contact-card h5 { color: #fff; font-weight: 900; margin-bottom: 8px; }
+        .contact-card p { font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 0; }
+
+        /* زر الرجوع */
+        .nav-back {
+            position: fixed; top: 20px; right: 20px;
+            background: rgba(0, 242, 255, 0.1);
+            color: var(--neon-cyan);
+            padding: 10px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--neon-cyan);
+            z-index: 1000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-bg-wrapper">
+        <video autoplay muted loop playsinline>
+            <source src="c:\Users\ali\Downloads\f1c46960fb1d4640a20c35a90f051c9a.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay"></div>
+    </div>
+
+    <a href="index.html" class="nav-back"><i class="fas fa-arrow-right ms-2"></i> الرئيسية</a>
+
+    <div class="container py-5" style="margin-top: 60px;">
+        <div class="text-center mb-5" data-aos="zoom-in">
+            <h1 class="display-5 fw-900" style="color: var(--neon-cyan);">تواصل مباشرة مع المختبر</h1>
+            <p class="opacity-75">صيانة الآيفون المتقدمة - المهندس حذيفة الذيب</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            
+            <div class="col-12" data-aos="fade-up">
+                <a href="https://maps.app.goo.gl/3DxRYqiAKHbouXEk7?g_st=ipc" target="_blank" class="contact-card map-card">
+                    <div class="icon-box map-icon"><i class="fas fa-location-dot"></i></div>
+                    <h5 style="color: var(--google-red);">موقع المختبر عبر GPS</h5>
+                    <p>انقر لفتح الاتجاهات مباشرة - ليبيا، صرمان</p>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+                <a href="https://wa.me/218915473294" class="contact-card">
+                    <div class="icon-box"><i class="fab fa-whatsapp"></i></div>
+                    <h5>واتساب</h5>
+                    <p>091-5473294</p>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+                <a href="https://www.facebook.com/share/1C3xD1BBhz/?mibextid=wwXIfr" target="_blank" class="contact-card">
+                    <div class="icon-box"><i class="fab fa-facebook"></i></div>
+                    <h5>فيسبوك</h5>
+                    <p>الحساب الرسمي</p>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+                <a href="https://www.tiktok.com/@hodyfh.aldeeb?_r=1&_t=ZM-92ZLw0j87tE" target="_blank" class="contact-card">
+                    <div class="icon-box"><i class="fab fa-tiktok"></i></div>
+                    <h5>تيك توك</h5>
+                    <p>@hodyfh.aldeeb</p>
+                </a>
+            </div>
+
+            <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="400">
+                <a href="tel:0915473294" class="contact-card">
+                    <div class="icon-box"><i class="fas fa-phone-volume"></i></div>
+                    <h5>اتصال هاتف</h5>
+                    <p>تواصل معنا هاتفياً</p>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="row mt-5" data-aos="fade-up">
+            <div class="col-12">
+                <div style="background: var(--glass); padding: 25px; border-radius: 20px; border-right: 5px solid var(--neon-cyan); text-align: center;">
+                    <p class="mb-0 small opacity-75">
+                        <i class="fas fa-info-circle ms-2 text-info"></i>
+                        نحن نعمل على صيانة اللوحات الأم (Motherboard) بأحدث الميكروسكوبات المجهرية.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-4 opacity-25 small orbitron">
+        HUZAIFA_LAB // SECURE_COMMUNICATION_LINE
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init({ duration: 1000, once: true });</script>
+</body>
+</html>

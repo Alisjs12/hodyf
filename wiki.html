@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>الموسوعة التقنية | مختبر حذيفة الذيب</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root { 
+            --cyan: #00f2ff; 
+            --purple: #bc13fe; 
+            --bg: #020205; 
+            --glass: rgba(255, 255, 255, 0.05);
+            --border-glass: rgba(0, 242, 255, 0.2);
+        }
+        
+        body { 
+            background: var(--bg); 
+            color: #fff; 
+            font-family: 'Cairo', sans-serif; 
+            overflow-x: hidden; 
+            line-height: 1.8;
+        }
+
+        /* خلفية نيون خفيفة */
+        body::before {
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(188, 19, 254, 0.05) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(0, 242, 255, 0.05) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        .wiki-header {
+            padding: 80px 15px 40px;
+            text-align: center;
+        }
+
+        .wiki-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            background: linear-gradient(to bottom, #fff, var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--cyan);
+            margin: 50px 0 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.4rem;
+        }
+        .section-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-glass), transparent); }
+
+        .tech-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-glass);
+            border-radius: 25px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .tech-card:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 10px 40px rgba(0, 242, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .tech-card i { color: var(--purple); font-size: 1.8rem; margin-bottom: 15px; display: block; }
+
+        .table-responsive {
+            border-radius: 20px;
+            border: 1px solid var(--border-glass);
+            margin-top: 20px;
+        }
+        .table { margin-bottom: 0; color: #fff; border-color: var(--border-glass); }
+        .table thead { background: rgba(0, 242, 255, 0.1); color: var(--cyan); font-family: 'Orbitron'; }
+
+        .tip-box {
+            background: linear-gradient(135deg, rgba(188, 19, 254, 0.1), rgba(0, 242, 255, 0.05));
+            border-left: 4px solid var(--purple);
+            border-right: 4px solid var(--cyan);
+            padding: 25px;
+            border-radius: 20px;
+        }
+
+        .nav-back {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            background: var(--glass); backdrop-filter: blur(5px);
+            color: var(--cyan); border: 1px solid var(--cyan);
+            width: 45px; height: 45px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="nav-back"><i class="fas fa-chevron-left"></i></a>
+
+    <header class="wiki-header" data-aos="zoom-in">
+        <h1 class="display-3">TECH_WIKI</h1>
+        <p class="opacity-50">الدليل التقني المتخصص - مختبر حذيفة الذيب</p>
+    </header>
+
+    <div class="container pb-5">
+
+        <h2 class="section-title" data-aos="fade-right">01 // SCREEN_INTELLIGENCE</h2>
+        
+        <div class="row g-4">
+            <div class="col-md-6" data-aos="fade-up">
+                <div class="tech-card">
+                    <i class="fas fa-microchip"></i>
+                    <h5 class="text-cyan fw-bold">تحليل تقنيات العرض</h5>
+                    <p class="small text-white-50">نحن لا نستبدل الزجاج فقط، بل نعالج أنظمة العرض المعقدة. شاشات **OLED** تمنحك عمق ألوان حقيقي، بينما شاشات **LCD** تعتمد على إضاءة خلفية (Backlight) مما يجعلها أقل كفاءة في استهلاك الطاقة.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="tech-card h-100">
+                    <h5 class="text-warning mb-3">مقارنة المهندس: تقنيات الـ OLED</h5>
+                    <div class="table-responsive">
+                        <table class="table table-dark align-middle text-center">
+                            <thead>
+                                <tr>
+                                    <th>المعيار</th>
+                                    <th>Soft OLED</th>
+                                    <th>Hard OLED</th>
+                                </tr>
+                            </thead>
+                            <tbody class="small">
+                                <tr><td>المرونة</td><td class="text-info">عالية (بلاستيك)</td><td class="text-danger">صلبة (زجاج)</td></tr>
+                                <tr><td>السمك</td><td>نفس الوكالة</td><td>أكبر قليلاً</td></tr>
+                                <tr><td>التحمل</td><td>ممتاز للسقوط</td><td>سهل الكسر داخلياً</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title" data-aos="fade-right">02 // LOGIC_BOARD_SURGERY</h2>
+        <div class="row g-4">
+            <div class="col-lg-12" data-aos="fade-up">
+                <div class="tech-card">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <i class="fas fa-vial"></i>
+                            <h5 class="text-cyan fw-bold">جراحة الميكرو-سولدرينق</h5>
+                            <p class="text-white-50">نتعامل مع أعطال البورد العميقة (IC Repairs). الأجهزة الحديثة تستخدم بوردات **الـ ساندوتش** (طبقتين فوق بعض)، صيانة هذا النوع تتطلب دقة متناهية وحرارة مدروسة لمنع تلف المعالج.</p>
+                        </div>
+                        <div class="col-md-4 text-center d-none d-md-block opacity-25">
+                            <i class="fas fa-layer-group fa-5x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title" data-aos="fade-right">03 // ENERGY_MANAGEMENT</h2>
+        <div class="row" data-aos="fade-up">
+            <div class="col-12">
+                <div class="tip-box shadow-lg">
+                    <h5 class="text-purple fw-bold mb-4"><i class="fas fa-bolt me-2"></i> بروتوكولات الحفاظ على البطارية</h5>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="p-3 bg-dark bg-opacity-50 rounded-4 border border-secondary border-opacity-25">
+                                <h6 class="text-info">تجنب الحرارة</h6>
+                                <p class="small mb-0 opacity-75">الحرارة هي العدو الأول لخلايا الليثيوم، تجنب استخدام الهاتف أثناء الشحن السريع.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-dark bg-opacity-50 rounded-4 border border-secondary border-opacity-25">
+                                <h6 class="text-info">دورة الشحن</h6>
+                                <p class="small mb-0 opacity-75">يفضل الحفاظ على نسبة الشحن بين 20% و 85% لتقليل إجهاد الأقطاب الكيميائية.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-dark bg-opacity-50 rounded-4 border border-secondary border-opacity-25">
+                                <h6 class="text-info">الشواحن التجارية</h6>
+                                <p class="small mb-0 opacity-75">الشاحن الرديء يسبب ذبذبات غير مستقرة تؤدي لتلف آي سي الشحن (Hydra/Tristar).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="py-5 text-center opacity-25 small orbitron">
+        HUZAIFA_ALDEEB // LABS_SYSTEM_2025
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>AOS.init({ duration: 1000, once: true });</script>
+</body>
+</html>

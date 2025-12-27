@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>خدماتنا | HUZAIFA LAB</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Cairo:wght@300;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root { --neon-cyan: #00f2ff; --neon-purple: #bc13fe; --dark-void: #020205; }
+        
+        body { 
+            background-color: var(--dark-void); 
+            color: #fff; 
+            font-family: 'Cairo', sans-serif; 
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% -20%, #0a1020, var(--dark-void));
+        }
+
+        header {
+            padding: clamp(40px, 8vh, 80px) 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 242, 255, 0.1);
+        }
+
+        .service-module {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 242, 255, 0.1);
+            border-radius: 20px;
+            padding: clamp(20px, 5vw, 40px);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .service-module:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
+            transform: translateY(-10px);
+        }
+
+        .service-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--neon-cyan);
+            letter-spacing: 1px;
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+
+        .service-icon {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            color: var(--neon-cyan);
+            margin-bottom: 20px;
+            transition: 0.4s;
+        }
+
+        .service-module:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+            color: var(--neon-purple);
+        }
+
+        /* زر الرجوع للموبايل */
+        .btn-back {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(0, 242, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(5px);
+            text-decoration: none;
+        }
+
+        .leading-relaxed { line-height: 1.7; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="btn-back"><i class="fas fa-home"></i></a>
+
+    <header>
+        <h1 style="font-family: 'Orbitron'; letter-spacing: 3px; font-size: clamp(1.5rem, 6vw, 3rem);">SERVICE_PROTOCOLS</h1>
+        <p class="text-info small opacity-75 mt-2">قدرات المختبر المتقدمة في هندسة الأجهزة الذكية</p>
+    </header>
+
+    <div class="container py-5">
+        <div class="row g-4 justify-content-center">
+            
+            <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up">
+                <div class="service-module text-center">
+                    <i class="fas fa-microchip service-icon"></i>
+                    <h4 class="service-title">Micro-Soldering</h4>
+                    
+                    <p class="small opacity-75 leading-relaxed">إصلاح المسارات المقطوعة والمكونات الدقيقة على اللوحة الأم بدقة تصل إلى 0.02 ملم تحت المجهر الإلكتروني.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-module text-center" style="border-color: var(--neon-purple);">
+                    <i class="fas fa-database service-icon" style="color: var(--neon-purple);"></i>
+                    <h4 class="service-title" style="color: var(--neon-purple);">Data Recovery</h4>
+                    <p class="small opacity-75 leading-relaxed">استعادة البيانات من الأجهزة المتضررة تماماً (Dead Phones) عبر عمليات نقل المعالج والذاكرة (CPU Swap).</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-module text-center">
+                    <i class="fas fa-fingerprint service-icon"></i>
+                    <h4 class="service-title">Biometrics Fix</h4>
+                    <p class="small opacity-75 leading-relaxed">إصلاح مشاكل Face ID و Touch ID وبرمجتها لتعمل بكفاءة المصنع دون فقدان التشفير الأصلي.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up">
+                <div class="service-module text-center" style="border-color: var(--neon-purple);">
+                    <i class="fas fa-stethoscope service-icon" style="color: var(--neon-purple);"></i>
+                    <h4 class="service-title" style="color: var(--neon-purple);">Diagnosis</h4>
+                    <p class="small opacity-75 leading-relaxed">فحص الدوائر المتكاملة (ICs) واكتشاف التسريب واستهلاك الطاقة غير الطبيعي باستخدام الكاميرا الحرارية.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-module text-center">
+                    <i class="fas fa-bolt service-icon"></i>
+                    <h4 class="service-title">Power Circuits</h4>
+                    <p class="small opacity-75 leading-relaxed">معالجة أعطال دوائر الشحن (Tristar/Tigris) ومشكلات الإقلاع المفاجئ الناتجة عن تذبذب التيار.</p>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-module text-center" style="border-color: var(--neon-purple);">
+                    <i class="fas fa-terminal service-icon" style="color: var(--neon-purple);"></i>
+                    <h4 class="service-title" style="color: var(--neon-purple);">NAND Programming</h4>
+                    <p class="small opacity-75 leading-relaxed">ترقية مساحات التخزين، إصلاح أخطاء النظام (Error 4013)، وبرمجة ذواكر الـ NAND لأجهزة iPhone & iPad.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="py-5 text-center opacity-50">
+        <p class="small">HUZAIFA_LAB // PROTOCOL_V2.5 // 2025</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            disable: 'mobile' // تعطيل الانيميشن في الموبايلات الضعيفة لتحسين الأداء
+        });
+    </script>
+</body>
+</html>

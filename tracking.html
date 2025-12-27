@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>إدارة مختبر حذيفة | للهاتف</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root { --main-cyan: #00f2ff; --dark-bg: #0a0b10; --card-bg: #161b22; }
+        body { background-color: var(--dark-bg); color: #e6edf3; font-family: 'Cairo', sans-serif; padding-bottom: 50px; }
+
+        /* تنسيق الكروت */
+        .mobile-card { background: var(--card-bg); border: 1px solid #30363d; border-radius: 15px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        .id-input-big { background: #000 !important; border: 2px solid var(--main-cyan) !important; color: var(--main-cyan) !important; font-size: 2.2rem; font-weight: bold; text-align: center; border-radius: 12px; margin-bottom: 15px; }
+        
+        .btn-action { padding: 12px; border-radius: 12px; font-weight: 700; width: 100%; margin-bottom: 10px; border: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; }
+        .btn-action:active { transform: scale(0.95); }
+
+        /* الأزرار الملونة */
+        .btn-approve { background-color: #28a745; color: white; }
+        .btn-reject { background-color: #dc3545; color: white; }
+        .btn-search { background-color: var(--main-cyan); color: #000; }
+
+        .status-dot { height: 10px; width: 10px; border-radius: 50%; display: inline-block; margin-left: 8px; }
+        .table-mobile { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
+        .table-mobile tr { background: rgba(255,255,255,0.03); }
+        .table-mobile td { padding: 12px; vertical-align: middle; border-radius: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container py-4">
+    <div class="text-center mb-4">
+        <h2 class="fw-900" style="color: var(--main-cyan); letter-spacing: 2px;">HUZAIFA LAB</h2>
+        <p class="small opacity-50">نظام إدارة الصيانة المتقدم</p>
+    </div>
+
+    <div class="mobile-card shadow-lg">
+        <label class="d-block mb-3 text-center opacity-75">أدخل رقم الجهاز للتتبع</label>
+        <input type="number" id="orderId" class="form-control id-input-big" placeholder="0000" inputmode="numeric">
+        <button onclick="searchDevice()" class="btn-action btn-search">
+            <i class="fas fa-search"></i> استعلام عن الجهاز
+        </button>
+
+        <div id="resultBox" style="display:none;" class="mt-4 pt-3 border-top border-secondary">
+            <div class="p-3 rounded bg-dark border border-secondary mb-3">
+                <h6 id="resModel" class="text-info fw-bold"></h6>
+                <p id="resProblem" class="small mb-0 text-white-50 mt-2"></p>
+            </div>
+            
+            <div id="approvalSection">
+                <button onclick="setDecision('موافق ✅')" class="btn-action btn-approve">
+                    <i class="fas fa-check-circle"></i> موافق على الإصلاح
+                </button>
+                <button onclick="setDecision('مرفوض ❌')" class="btn-action btn-reject">
+                    <i class="fas fa-times-circle"></i> رفض ومراجعة المهندس
+                </button>
+            </div>
+            <div id="successMsg" class="alert alert-info text-center fw-bold" style="display:none;"></div>
+        </div>
+    </div>
+
+    <div class="text-center mt-5">
+        <button onclick="toggleAdmin()" class="btn btn-link text-secondary text-decoration-none small">
+            <i class="fas fa-lock ms-1"></i> دخول الإدارة
+        </button>
+    </div>
+
+    <div id="adminLoginWrap" style="display:none;" class="mobile-card mt-3 border-info">
+        <div id="loginForm">
+            <input type="password" id="adminPass" class="form-control mb-2 text-center" placeholder="كلمة المرور">
+            <button onclick="loginAdmin()" class="btn btn-info w-100 fw-bold">دخول النظام</button>
+        </div>
+        
+        <div id="adminTools" style="display:none;">
+            <h6 class="border-bottom pb-2 mb-3 text-warning"><i class="fas fa-plus-circle ms-1"></i> إضافة جهاز جديد</h6>
+            <div class="row g-2">
+                <div class="col-6"><input type="number" id="newId" class="form-control mb-2" placeholder="رقم الجهاز"></div>
+                <div class="col-6"><input type="text" id="newModel" class="form-control mb-2" placeholder="الموديل"></div>
+            </div>
+            <input type="tel" id="newPhone" class="form-control mb-2" placeholder="رقم واتساب الزبون">
+            <textarea id="newProblem" class="form-control mb-2" placeholder="التشخيص والسعر المتوقع"></textarea>
+            <button onclick="addNewOrder()" class="btn btn-warning w-100 fw-bold mb-4">إرسال للنظام</button>
+            
+            <h6 class="mt-4 border-bottom pb-2 text-success">الأجهزة الحالية</h6>
+            <div class="table-responsive">
+                <table class="table-mobile">
+                    <tbody id="ordersList"></tbody>
+                </table>
+            </div>
+
+            <h6 class="mt-4 border-bottom pb-2 opacity-50 text-secondary text-center small">الأرشيف</h6>
+            <div id="archiveList" class="opacity-50 small"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.1.3/firebase-database-compat.js"></script>
+
+<script>
+    const firebaseConfig = { databaseURL: "https://huzaifa-lab-default-rtdb.europe-west1.firebasedatabase.app/" };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const botToken = "8405532039:AAECWN7krzYjq_i18_Q1AGS4xHarPx832ck";
+    const myChatId = "8459612624";
+    let activeId = "";
+
+    function toggleAdmin() {
+        const wrap = document.getElementById('adminLoginWrap');
+        wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function searchDevice() {
+        const id = document.getElementById('orderId').value;
+        if(!id) return;
+        activeId = id;
+        db.ref('orders/' + id).on('value', (s) => {
+            if(s.exists()){
+                const d = s.val();
+                document.getElementById('resultBox').style.display = 'block';
+                document.getElementById('resModel').innerText = "الجهاز: " + d.model;
+                document.getElementById('resProblem').innerText = "التشخيص: " + d.problem;
+                
+                if(d.decision) {
+                    document.getElementById('approvalSection').style.display = 'none';
+                    document.getElementById('successMsg').style.display = 'block';
+                    document.getElementById('successMsg').innerHTML = `<i class="fas fa-info-circle"></i> تم تسجيل ردك بـ: <br> ${d.decision}`;
+                } else {
+                    document.getElementById('approvalSection').style.display = 'block';
+                    document.getElementById('successMsg').style.display = 'none';
+                }
+            } else { alert("عذراً، الرقم غير موجود في سجلاتنا"); }
+        });
+    }
+
+    async function setDecision(val) {
+        if(!activeId) return;
+        const s = await db.ref('orders/' + activeId).get();
+        const data = s.val();
+        await db.ref('orders/' + activeId).update({ decision: val });
+        
+        const msg = `🔔 رد جديد من زبون:\n📱 الجهاز: ${data.model}\n🔢 الرقم: ${activeId}\n📢 القرار: ${val}`;
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${myChatId}&text=${encodeURIComponent(msg)}`);
+    }
+
+    function loginAdmin() {
+        if(document.getElementById('adminPass').value === "2025") {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('adminTools').style.display = 'block';
+            loadAdminData();
+            loadArchiveData();
+        } else { alert("كلمة المرور غير صحيحة"); }
+    }
+
+    function loadAdminData() {
+        db.ref('orders').on('value', (snap) => {
+            const list = document.getElementById('ordersList');
+            list.innerHTML = "";
+            snap.forEach((child) => {
+                const d = child.val();
+                let dotColor = d.decision?.includes('موافق') ? '#28a745' : (d.decision?.includes('مرفوض') ? '#dc3545' : '#ffc107');
+                list.innerHTML += `<tr>
+                    <td><b>#${d.id}</b><br><small>${d.model}</small></td>
+                    <td><span class="status-dot" style="background:${dotColor}"></span><small>${d.decision || 'بانتظار'}</small></td>
+                    <td class="text-end">
+                        <button onclick="sendWA('${d.phone}', '${d.model}', '${d.id}')" class="btn btn-sm btn-success mb-1"><i class="fab fa-whatsapp"></i></button>
+                        <button onclick="archiveOrder('${d.id}')" class="btn btn-sm btn-outline-info"><i class="fas fa-archive"></i></button>
+                    </td>
+                </tr>`;
+            });
+        });
+    }
+
+    function loadArchiveData() {
+        db.ref('archive').on('value', (snap) => {
+            const list = document.getElementById('archiveList');
+            list.innerHTML = "";
+            snap.forEach((child) => {
+                const d = child.val();
+                list.innerHTML += `<div class="d-flex justify-content-between p-2 border-bottom border-secondary">
+                    <span>#${d.id} - ${d.model}</span>
+                    <i onclick="deleteForever('${d.id}')" class="fas fa-trash-alt text-danger"></i>
+                </div>`;
+            });
+        });
+    }
+
+    async function archiveOrder(id) {
+        if(confirm("نقل للأرشيف؟")) {
+            const s = await db.ref('orders/' + id).get();
+            await db.ref('archive/' + id).set(s.val());
+            await db.ref('orders/' + id).remove();
+        }
+    }
+
+    function deleteForever(id) { if(confirm("حذف نهائي؟")) db.ref('archive/' + id).remove(); }
+
+    function sendWA(phone, model, id) {
+        const msg = `مرحباً بك من  حذيفة الذيب 🛠%0A%0Aجهازك (${model}) برقم (${id}) أصبح: *جاهز للاستلام ✅*`;
+        window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+    }
+
+    async function addNewOrder() {
+        const id = document.getElementById('newId').value;
+        const mo = document.getElementById('newModel').value;
+        const ph = document.getElementById('newPhone').value;
+        const pr = document.getElementById('newProblem').value;
+        if(id && mo && ph && pr) {
+            await db.ref('orders/' + id).set({ id, model: mo, phone: ph, problem: pr, decision: "" });
+            alert("تمت الإضافة بنجاح");
+            document.getElementById('newId').value = "";
+            document.getElementById('newModel').value = "";
+        } else { alert("يرجى ملء جميع الحقول"); }
+    }
+</script>
+</body>
+</html>
